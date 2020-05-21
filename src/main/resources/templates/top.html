@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+
+	<head>
+		<meta charset="UTF-8">
+		<title>成都大学实训系统</title>
+		<style type="text/css">
+			body {
+				margin: 0px;
+				padding: 0px;
+				background-color: rgb(244, 244, 244);
+			}
+			
+			h1,
+			h2,
+			h3,
+			h4,
+			h5,
+			h6,
+			p,
+			ol,
+			ul {
+				margin: 0px;
+			}
+			
+			div {
+				margin: 0px;
+				padding: 0px;
+			}
+			
+			ul li {
+				margin: 0px;
+				padding: 0px;
+			}
+			
+			.header {
+				height: 80px;
+				background-image: url(images/head-bg1.png);
+				background-size: cover;
+			}
+			
+			.comWidth {
+				width: 1185px;
+				margin: 0px auto;
+			}
+			
+			.logoBar {
+				float: left;
+				height: 80px;
+			}
+			
+			.logo {
+				width: 52px;
+				height: 52px;
+				margin: 30% 0;
+			}
+			
+			.menuBar li {
+				float: right;
+				list-style-type: none;
+				/*margin-top: 32px;*/
+				/*padding-left: 30px;*/
+			}
+			
+			.menuBar li a {
+				position: relative;
+				display: block;
+				width: 80px;
+				text-decoration: none;
+				height: 100%;
+				color: white;
+				text-align: center;
+				line-height: 80px;
+				font-size: 13px;
+			}
+			
+			.user-icon {
+				background: url(images/user-icon.png) no-repeat;
+				background-size: 100% 100%;
+			}
+			
+			.menuBar li a:hover {
+				background-color: rgb(32, 152, 209);
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="header">
+			<div class="banner comWidth" id="ban-menu">
+				<div class="logoBar">
+					<i><img src="images/logo-white.png" class="logo" alt=""></i>
+				</div>
+				<ul class="menuBar">
+					<li><i></i></li>
+					<li>
+						<a class="" target="_top" href="Login/login.jsp"><i style="padding-left: 16px;" class="user-icon"></i>&nbsp;登录|注册</a>
+					</li>
+					<li>
+						<a class="" href="javascript:;">资料下载</a>
+					</li>
+					<li>
+						<a class="" href="javascript:;">企业信息</a>
+					</li>
+					<li>
+						<a class="" href="javascript:;">企业公告</a>
+					</li>
+					<li>
+						<a class="" href="javascript:;">学院通知</a>
+					</li>
+					<li>
+						<a class="" href="javascript:;">关于我们</a>
+					</li>
+					<li>
+						<a class="" target="_top" href="ShowIndexNoticeListServlet">主页</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</body>
+
+</html>

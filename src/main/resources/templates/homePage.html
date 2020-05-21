@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>成都大学实训实习系统</title>
+		<style type="text/css">
+			body {
+				margin: 0px;
+				padding: 0px;
+				background-color: rgb(244, 244, 244);
+			}
+			
+			h1,
+			h2,
+			h3,
+			h4,
+			h5,
+			h6,
+			p,
+			ol,
+			ul {
+				margin: 0px;
+			}
+			
+			div {
+				margin: 0px;
+				padding: 0px;
+			}
+			
+			.ComWidth {
+				width: 85%;
+				margin: 0px auto;
+			}
+			
+			.panel {
+				margin-top: 50px;
+			}
+			
+			.panel-heading {
+				height: 38px;
+				background-color: rgb(78, 124, 184);
+				border-radius: 3px;
+				font-size: 18px;
+				line-height: 38px;
+				color: white;
+			}
+			
+			.panel-body {
+				height: 100%;
+				background-color: white;
+			}
+			
+			.page-header h1 {
+				text-align: center;
+				font-size: 24px;
+				color: #444444;
+				padding: 15px 0px 15px;
+			}
+			
+			.col-lg-12 {
+				text-align: center;
+				padding: 25px 0px 15px;
+				color: #888888;
+			}
+			
+			.article-content {
+				padding: 40px 0px 50px 50px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="ComWidth">
+			<div class="panel">
+				<!--顶部标题-->
+				<div class="panel-heading">
+					<h3 class="panel-title">${noticeAdmin!=null?"学院通知公告":"企业通知公告" }</h3>
+				</div>
+				<!--列表内容-->
+				<div class="panel-body">
+					<div class="page-header">
+						<h1>${notice.title }</h1>
+					</div>
+					<hr>
+					<div class="col-lg-12">
+						<span class="sub-info">来源:
+						${noticeAdmin!=null?"管理员":noticeCompany.companyUsername }&nbsp;&nbsp;&nbsp;时间:
+						${notice.releaseDate }
+					</span>
+					</div>
+					<div class="article-content">
+
+						<p style="margin: 0pt; text-align: left; mso-pagination: widow-orphan;">
+							<span style="font-family: 宋体; font-size: 12pt; mso-spacerun: &amp;amp; amp; amp; quot; yes &amp;amp; amp; amp; quot;; mso-font-kerning: 0.0000pt;"><font
+							face="宋体">${notice.content }</font></span>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>

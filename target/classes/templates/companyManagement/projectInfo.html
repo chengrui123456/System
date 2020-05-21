@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+
+	<head>
+		<meta charset="UTF-8">
+		<title>公司发布项目</title>
+		<link rel="stylesheet" type="text/css" th:href="@{../css/bootstrap/css/bootstrap.min.css}">
+		<script th:src="@{../js/jquery-3.3.1.min.js}"></script>
+		<script th:src="@{../js/bootstrap.min.js}"></script>
+		<style type="text/css">
+			a{
+				text-decoration: none;
+			}
+			
+			.NoaduitProjectList{
+				position: absolute;
+				top: 72px;
+				left: 120px;
+			}
+		</style>
+<!--		<script>-->
+<!--			$(document).ready(function()){-->
+<!--			var message=$(".msg").val();-->
+<!--			if(message!=""||message=!=null){-->
+<!--			alert(message);-->
+<!--			}-->
+<!--			}-->
+<!--		</script>-->
+	</head>
+
+	<body>
+		<!--start 公司发布项目列表-->
+		<div class="panel-body">
+			<p>
+				<h3><b>公司发布项目</b></h3>
+
+<!--				<input type="hidden" th:value="${msg}" class="msg">-->
+			</p>
+			<form method="post" class="allProjectList" id="allProjectList" action="/allProjectList">
+				<input type="submit" style="background: #428BCA" id="AllList"  value="所有项目" class="btn btn-primary sto-btn">
+			</form>
+			<br />
+			<form id="NoaduitProjectList" class="NoaduitProjectList" action="/NoaduitProjectList" method="post">
+				<input type="submit" style="background: #428BCA" id="commonList"  value="未审核项目" class="btn btn-primary comm-btn">
+			</form>
+			<div>
+				<form class="form-inline" id="find-param" action="/findProjectBySome" method="post">
+					<div class="form-group">
+						<label for="find-name">编号</label>
+						<input type="text" class="form-control" placeholder="请输入项目编号" id="find-name" name="No" >
+					</div>
+					&nbsp;
+					<div class="form-group">
+						<label for="find-price">项目名称</label>
+						<input type="text" class="form-control" id="find-price" placeholder="请输入项目名称" name="name">
+					</div>
+					&nbsp;
+					<div class="form-group">
+						<label>年级</label>
+						<br />
+						<select id="find-status" style="width: 100px;height: 32px;" name="grade">
+						<option value="">---请选择---</option>
+						<option value="2014">2014</option>
+						<option value="2015">2015</option>
+						<option value="2016">2016</option>
+							<option value="2017">2017</option>
+						</select>
+					</div>
+					&nbsp;&nbsp;
+					<button type="submit" style="margin-top: 25px;" class="btn btn-primary">查询</button>
+				</form>
+			</div>
+			<br>
+			<!--<span>总共<span th:text="${pagehelper.totalPage}"></span>页</span>-->
+			<!--<span>总记录<span th:text="${pagehelper.totalSize}"></span>条</span>-->
+			<!--<span>当前第<span th:text="${pagehelper.pageNow}"></span>页</span>-->
+			<!--<span>本页<span th:text="${(pagehelper.totalPage==paper.pageNow)?(pagehelper.totalSize%paper.pageSize):pagehelper.pageSize}"></span>条</span>-->
+			<div class="show-list text-center" style="font-size: 15px">
+				<table class="table table-bordered table-hover" style='text-align: center;'>
+					<thead>
+						<tr class="text-danger">
+							<th class="text-center">项目编号</th>
+							<th class="text-center">项目名称</th>
+							<th class="text-center">开课人数</th>
+							<th class="text-center">开课老师</th>
+							<th class="text-center">老师职称</th>
+							<th class="text-center">上传时间</th>
+							<th class="text-center">审核时间</th>
+							<th class="text-center">截止日期</th>
+							<th class="text-center">项目总结</th>
+							<th class="text-center">开课年级</th>
+							<th class="text-center">开课专业</th>
+							<th class="text-center">操作</th>
+
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="ProjectPageInfo : ${pageInfo.list}">
+							<td th:text="${ProjectPageInfo.No}"></td>
+							<td th:text="${ProjectPageInfo.name}"></td>
+							<td th:text="${ProjectPageInfo.students_num}"></td>
+							<td th:text="${ProjectPageInfo.company_teacher}"></td>
+							<td th:text="${ProjectPageInfo.company_teacher_title}"></td>
+							<td th:text="${ProjectPageInfo.release_date}"></td>
+							<td th:text="${ProjectPageInfo.audit_date}"></td>
+							<td th:text="${ProjectPageInfo.end_date}"></td>
+							<td th:text="${ProjectPageInfo.summary}"></td>
+							<td th:text="${ProjectPageInfo.grade}"></td>
+							<td th:text="${ProjectPageInfo.major}"></td>
+
+							<td>
+								<!--
+                                	作者：offline
+                                	时间：2019-09-24
+                                	描述：修改这里经过一个Controller,href传一个ProjectId值， 然后获得project的信息存储在一个你自己的对象中
+                                -->
+
+
+								<button class="btn btn-primary" th:if="${ProjectPageInfo.audit_date!=null}"><a th:href="@{/updateProjectl?(No=${ProjectPageInfo.No})}"   style="text-decoration: none;color: white;">修改</a></button>
+
+								<button class="btn btn-primary" th:if="${ProjectPageInfo.audit_date==null}"><a th:href="@{/deleteProject?(No=${ProjectPageInfo.No})}"  style="text-decoration: none;color: white;"disabled="disabled">删除</a></button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+<!--				<input type="hidden" th:value="${key}">-->
+				<p>当前 <span th:text="${pageInfo.pageNum}"></span> 页,总 <span th:text="${pageInfo.pages}"></span> 页,共 <span th:text="${pageInfo.total}"></span> 条记录</p>
+				<button class="btn btn-primary"><a style="text-decoration: none;color: white; " th:href="@{/allProjectList}">首页</a></button>
+
+				<button class="btn btn-primary" ><a style="text-decoration: none;color: white; " th:href="@{/allProjectList(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}">上一页</a></button>
+				<!--<button class="btn btn-primary"><a style="text-decoration: none;color: white; " th:if="${not pagehelper.isIsLastPage()}" th:href="@{allProjectList(start=${pagehelper.getPageNum()+1})}">下一页</a></button>-->
+				<button class="btn btn-primary" ><a style="text-decoration: none;color: white; "  th:href="@{/allProjectList(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}">下一页</a></button>
+				<button class="btn btn-primary"><a style="text-decoration: none;color: white; " th:href="@{/allProjectList(pageNum=${pageInfo.pages})}">尾页</a></button>
+
+
+
+			</div>
+		</div>
+
+	</body>
+
+</html>

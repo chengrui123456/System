@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+
+	<head>
+		<meta charset="UTF-8">
+		<title>企业公告信息管理</title>
+		<link rel="stylesheet" type="text/css" th:href="@{../css/bootstrap/css/bootstrap.min.css}">
+		<script th:src="@{../js/jquery-3.3.1.min.js}"></script>
+		<script th:src="@{../js/bootstrap.min.js}"></script>
+		<style type="text/css">
+			a {
+				text-decoration: none;
+			}
+			
+			.NoaduitProjectList {
+				position: absolute;
+				top: 72px;
+				left: 120px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--start 公司发布公告列表-->
+		<div class="panel-body">
+			<p>
+				<h3><b>公司发布公告</b></h3>
+			</p>
+			<form method="post" class="allProjectList" id="allProjectList" action="#">
+				<input type="submit" style="background: #428BCA" id="AllList" value="所有公告" class="btn btn-primary sto-btn">
+			</form>
+			<br />
+			<form id="NoaduitProjectList" class="NoaduitProjectList" action="#" method="post">
+				<input type="submit" style="background: #428BCA" id="commonList" value="未审核公告" class="btn btn-primary comm-btn">
+			</form>
+			<br>
+				<div class="show-list text-center" style="font-size: 15px">
+				<table class="table table-bordered table-hover" style='text-align: center;'>
+					<thead>
+						<tr class="text-danger">
+							<th class="text-center">公告ID</th>
+							<th class="text-center">公告标题</th>
+							<th class="text-center">公告内容</th>
+							<th class="text-center">公告发布时间</th>
+							<th class="text-center">公告审核时间</th>
+							<th class="text-center">操作</th>
+
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="cop : ${pageInfo.list}">
+							<td th:text="${cop.ID}"></td>
+							<td th:text="${cop.title}"></td>
+							<td th:text="${cop.content}"></td>
+							<td th:text="${cop.release_date}"></td>
+							<td th:text="${cop.audit_date}"></td>
+							<td>
+								<button class="btn btn-primary" th:if="${cop.audit_date!=null}"><a href="#"    style="text-decoration: none;color: white;">不可修改</a></button>
+								<button class="btn btn-primary" th:if="${cop.audit_date==null}"><a th:href="@{/updateNoticeProjectl?(No=${cop.ID})}"   style="text-decoration: none;color: white;"disabled="disabled">修改</a></button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<p>当前 <span th:text="${pageInfo.pageNum}"></span> 页,总 <span th:text="${pageInfo.pages}"></span> 页,共 <span th:text="${pageInfo.total}"></span> 条记录</p>
+				<button class="btn btn-primary"><a style="text-decoration: none;color: white; " th:href="@{/allProjectList}">首页</a></button>
+				<button class="btn btn-primary" ><a style="text-decoration: none;color: white; " th:href="@{/allProjectList(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}">上一页</a></button>
+				<button class="btn btn-primary" ><a style="text-decoration: none;color: white; "  th:href="@{/allProjectList(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}">下一页</a></button>
+				<button class="btn btn-primary"><a style="text-decoration: none;color: white; " th:href="@{/allProjectList(pageNum=${pageInfo.pages})}">尾页</a></button>
+			</div>
+		</div>
+	</body>
+
+</html>

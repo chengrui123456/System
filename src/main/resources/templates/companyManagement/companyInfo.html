@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+
+	<head>
+		<meta charset="UTF-8">
+		<title>用户信息管理</title>
+		<link rel="stylesheet" type="text/css" th:href="@{../css/bootstrap.min.css}">
+		<script th:src="@{../js/jquery-3.3.1.min.js}"></script>
+		<script th:src="@{../js/bootstrap.min.js}"></script>
+	</head>
+
+	<body>
+		<div class="con-userinfo">
+			<b><span th:text="${session.account}"></span>用户信息</b>
+			<br />
+			<br />
+			<form action="UpdateCompanyInfo" method="post">
+				<p>
+					用户账号:<input type="text" readonly="readonly" th:value="${session.account }" name="userid">
+					公司名称:<input type="text" readonly="readonly" th:value="${session.com.companyName }" name="username" class="username">
+					公司邮箱:<input type="text" readonly="readonly" th:value="${session.com.mailbox }" name="usermail">
+				</p>
+				<p>
+					公司联系人:<input type="text" th:value="${session.com.contacts }" name="usercontacts">
+					公司电话:<input type="text" th:value="${session.com.phone }" name="userphone">
+					公司地址:<input type="text" th:value="${session.com.address }" name="useraddress">
+				</p>
+				<p>
+					公司密码:<input type="password" readonly="readonly" th:value="${session.com.password }" name="userpwd">
+					<a class=""  th:onclick="'javascript:openModal()'">修改密码</a>
+					<!--错误信息 -->
+					<span th:text="${msg}" style="color:red;"></span>
+				</p>
+				<p>
+					公司加入日期:<input type="text" readonly="readonly" th:value="${session.com.auditDate }" name="userdate">
+				</p>
+				企业简介:
+				<p>
+					<textarea rows="8" cols="101" name="profile" th:text="${session.com.profile}" ></textarea>
+				</p>
+				<button type="submit" class="btn btn-primary" name="send" align="left" id="send">保存</button>
+				<button type="reset" class="btn btn-primary" name="cz">重置</button>
+			</form>
+		</div>
+		
+		
+				<!-- 修改密码 -->
+		<div class="modal fade" tabindex="-1" id="update-modal">
+			<!-- 窗口声明 -->
+			<div class="modal-dialog modal-lg">
+				<!-- 内容声明 -->
+				<form class="form-horizontal" action="/resetpassword">
+					<div class="modal-content">
+						<!-- 头部、主体、脚注 -->
+						<div class="modal-header">
+							<button class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">修改密码</h4>
+						</div>
+						<div class="modal-body text-center row">
+							<!-- 隐藏学生账号账号 -->
+							<!--<input type="hidden" name="account" id="companyAccount" />-->
+							<div class="form-group"  style="margin-left:-30px;width: 500px;">
+								<label for="up-password" class="col-sm-4 control-label">旧密码：</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" name="oldPassword" id="up-password" >
+								</div>
+							</div>
+							<div class="form-group" style="margin-left:-30px;width: 500px;">
+								<label for="nup-password" class="col-sm-4 control-label">新密码：</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" name="newPassword" id="nup-password">
+								</div>
+							</div>
+							<div class="form-group" style="margin-left:-30px;width: 500px;">
+								<label for="uup-password" class="col-sm-4 control-label">确认密码：</label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" name="toNewPassword" id="uup-password">
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button class="btn btn-primary" type="submit">确定修改
+                    </button>
+							<button class="btn btn-primary cancel" data-dismiss="modal">取消</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<script>
+
+			function openModal() {
+					$("#update-modal").modal("show");
+					<!--$("#companyAccount").val(id);-->
+			}
+		</script>
+		</body>
+</html>

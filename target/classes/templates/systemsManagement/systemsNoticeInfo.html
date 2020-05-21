@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+
+	<head>
+		<meta charset="UTF-8">
+		<title>学院公告操作</title>
+		<link rel="stylesheet" type="text/css" th:href="@{../css/bootstrap.min.css}">
+		<script th:src="@{../js/jquery-3.3.1.min.js}"></script>
+		<script th:src="@{../js/bootstrap.min.js}"></script>
+		<style type="text/css">
+			table {
+				border-collapse: collapse;
+				margin: 20px auto;
+			}
+			
+			tr td,
+			th {
+				width: 250px;
+				border: 1px solid black;
+				text-align: center;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--start 学院公告操作列表-->
+		<div class="panel-body">
+			<p>
+				<h3><b>学院公告信息管理</b></h3>
+			</p>
+			<a href="/adminAddNoticeHtml"><button type="button" class="btn btn-primary">增加公告</button></a>
+			<br />
+			<br>
+				<div class="show-list text-center" style="font-size: 15px">
+				<table class="table table-bordered table-hover" style='text-align: center;'>
+					<br />
+					<thead>
+						<tr class="text-danger">
+							<th class="text-center">公告ID</th>
+							<th class="text-center">公告标题</th>
+							<th class="text-center">公告内容</th>
+							<th class="text-center">公告发布时间</th>
+							<th class="text-center">操作</th>
+
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="adn : ${pageInfo.list}">
+							<td th:text="${adn.ID}"></td>
+							<td th:text="${adn.title}"></td>
+							<td th:text="${adn.content}"></td>
+							<td th:text="${adn.release_date}"></td>
+							<td>
+								<button class="btn btn-primary"><a th:href="@{/deleteNoticeBySS?(adNId=${adn.ID})}" style="text-decoration: none;color: white;">删除</a></button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<p>当前 <span th:text="${pageInfo.pageNum}"></span> 页,总 <span th:text="${pageInfo.pages}"></span> 页,共 <span th:text="${pageInfo.total}"></span> 条记录</p>
+				<button class="btn btn-primary"><a style="text-decoration: none;color: white; " th:href="@{/systemsCompanyNotice}">首页</a></button>
+				<button class="btn btn-primary" ><a style="text-decoration: none;color: white; " th:href="@{/systemsCompanyNotice(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}">上一页</a></button>
+				<button class="btn btn-primary" ><a style="text-decoration: none;color: white; "  th:href="@{/systemsCompanyNotice(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}">下一页</a></button>
+				<button class="btn btn-primary"><a style="text-decoration: none;color: white; " th:href="@{/systemsCompanyNotice(pageNum=${pageInfo.pages})}">尾页</a></button>
+			</div>
+		</div>
+		</div>
+	</body>
+
+</html>

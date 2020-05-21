@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+	<head>
+		<meta charset="UTF-8">
+<title>修改方案</title>
+</head>
+<body>
+	<form action="/updateProject" method="post">
+		<h1>修改信息</h1>
+		<p>
+			方案编号：<input type="text" name="pno" readonly="readonly" th:value="${session.uppro.No }">
+			方案名称：<input type="text" name="name" th:value="${session.uppro.name }">
+			开课年级：<input type="text" name="grade" th:value="${session.uppro.grade}">
+			开课人数：<input type="text" name="studentNum" th:value="${session.uppro.students_num}">
+		</p>
+		<p>
+
+			开课老师：<input type="text" name="companyTeacher" th:value="${session.uppro.company_teacher }">
+			开课类型：<input type="text" name="category" th:value="${session.uppro.category}">
+			教师职称：<input type="text" name="companyTeacherTitle" th:value="${session.uppro.company_teacher_title}">
+		</p>
+
+		开课专业：
+		<p>
+			<textarea name="major" cols="107" rows="8"><span th:text="${session.uppro.major}"></span></textarea>
+		</p>
+		方案说明：
+		<p>
+			<textarea name="instruction" cols="107" rows="8"><span th:text="${session.uppro.introduction }"></span></textarea>
+		</p>
+		<p>
+			<input type="submit" value="修改">
+		</p>
+	</form>
+
+</body>
+</html>

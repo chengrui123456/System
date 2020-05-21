@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+
+	<head>
+		<meta charset="UTF-8">
+		<title>查询学生成绩</title>
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap/css/bootstrap.min.css">
+		<script src="../js/jquery-3.3.1.min.js"></script>
+		<script src="../js/bootstrap.min.js"></script>
+	</head>
+	<style type="text/css">
+		table {
+			border-collapse: collapse;
+			margin: 20px auto;
+		}
+		
+		tr td,
+		th {
+			width: 250px;
+			border: 1px solid black;
+			text-align: center;
+		}
+		.fl{
+		float: left;
+		}
+		
+		.fr{
+		float: right;}
+	</style>
+	</head>
+
+	<body>
+		<br> &nbsp;&nbsp;
+		<button class="btn btn-primary fr" style="margin-top: 24px; margin-right: 20px;"><a href="#" style="text-decoration: none; color: white;">导出成绩</a></button>
+		<form class="form-inline" id="find-param" action="/studentController/findScoreByCategory" method="post">
+			<div class="form-group fl" style="margin-left: 20px;">
+				<label>类型</label>
+				<br />
+				<select id="find-type" class="type" style="width: 100px;height: 32px;" name="typeId">
+					<option value="">---请选择--</option>
+					<!--<option th:each="type : ${typeList}" th:value="${type.id}" th:text="${type.name}"></option>-->
+					<option value="1">概念实训</option>
+					<option value="2">技能实训</option>
+					<option value="3">综合实训</option>
+				</select>
+			</div>
+			<button type="submit" style="margin-top: 24px;" class="btn btn-primary">查询</button>
+		</form>
+		<table class="table table-condensed table-hover" style='text-align: center;'>
+			<tr class="danger">
+				<th>学生学号</th>
+				<th>项目编号</th>
+				<th>选择原因</th>
+				<th>学生分数</th>
+				<th>企业名字</th>
+			</tr>
+			<tr th:each="sco : ${pageInfo.list}">
+				<td th:text="${sco.studentNo}"></td>
+				<td th:text="${sco.projectNo}"></td>
+				<td th:text="${sco.selReason}"></td>
+				<td th:text="${sco.score}"></td>
+				<td th:text="${sco.companyName}"></td>
+			</tr>
+		</table>
+		<p>当前 <span th:text="${pageInfo.pageNum}"></span> 页,总 <span th:text="${pageInfo.pages}"></span> 页,共 <span th:text="${pageInfo.total}"></span> 条记录</p>
+		<a th:href="@{/getAllPerson}">首页</a>
+		<a th:href="@{/getAllPerson(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}">上一页</a>
+		<a th:href="@{/getAllPerson(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}">下一页</a>
+		<a th:href="@{/getAllPerson(pageNum=${pageInfo.pages})}">尾页</a>
+	</body>
+
+</html>

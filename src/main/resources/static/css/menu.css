@@ -1,0 +1,97 @@
+@charset "UTF-8";
+
+body {
+    margin: 0;
+    padding: 0;
+    /*background: url("http://image2.sina.com.cn/blog/tmpl/v3/control/images/bg.gif")*/
+    background-color: rgb(31, 47, 70);
+}
+
+body,
+td {
+    font-size: 16px
+}
+
+.menu_box_pad {
+    /*				background: #fdf9d5;*/
+    background: rgb(26, 41, 64);
+    padding: 0 2px 2px 2px
+}
+
+.menu_box {
+    border-top: 1px solid #ababab;
+    border-left: 1px solid #ababab;
+    border-right: 1px solid #d6d6d6;
+    border-bottom: 1px solid #d6d6d6
+}
+
+.menu_box th {
+    background: url(../images/menu_list_icon.gif) no-repeat center;
+    line-height: 42px;
+    width: 20px
+}
+
+.menu_box td {
+    background: url(../images/menu_list_split.gif) no-repeat left bottom;
+    line-height: 40px
+}
+
+.menu_box a {
+    text-decoration: none;
+    /*color: #000*/
+    color: white;
+}
+
+.menu_box a:hover {
+    text-decoration: underline
+}
+
+.hand {
+    cursor: hand;
+    cursor: pointer
+}
+
+.ctrl_menu {
+    /*border-left: 1px solid #767676;
+    border-bottom: 1px solid #767676;
+    border-right: 1px solid #767676;*/
+    /*background: #ffcf60;*/
+    background: rgb(31, 47, 70);
+}
+
+.ctrl_menu_title {
+    padding-left: 20px;
+    font-weight: bold;
+    line-height: 40px
+}
+
+.ctrl_menu_title_bg {
+    /*background: url(../images/menu_title_bg.gif)*/
+}
+
+.top_bg {
+    background: url(../images/top_bg.gif)
+}
+
+.logo_bg {
+    background: url(../images/logo_bg.gif)
+}
+
+#top_nav_menu {
+    color: #fff
+}
+
+#top_nav_menu a {
+    text-decoration: none;
+    color: #fff
+}
+
+#top_nav_menu a:hover {
+    text-decoration: underline;
+    color: #ff6
+}
+
+.common a,
+td {
+    color: white;
+}

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+
+	<head>
+		<meta charset="UTF-8">
+		<title>企业信息查看</title>
+		<!-- Scripts Starts -->
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+		<script src="../js/jquery-3.3.1.min.js"></script>
+		<script src="../js/bootstrap.min.js"></script>
+		<!-- End JQuery -->
+
+	</head>
+
+	<body>
+		<!--start 公司信息列表-->
+		<div class="panel-body">
+			<p>
+				<h3><b>企业信息列表</b></h3>
+				<br />
+			</p>
+			<div>
+				<form class="form-inline" id="find-param" action="/findCompanyByName" method="post">
+					<div class="form-group">
+						<label for="find-price">企业名称</label>
+						<input type="text" class="form-control" id="find-price" placeholder="请输入企业名称" name="price" >
+					</div>
+					&nbsp;&nbsp;
+					<button type="submit" class="btn btn-primary">查询</button>
+				</form>
+			</div>
+			<br>
+<!--			<span>总共<span th:text="${paper.totalPage}"></span>页</span>-->
+<!--			<span>总记录<span th:text="${paper.totalSize}"></span>条</span>-->
+<!--			<span>当前第<span th:text="${paper.pageNow}"></span>页</span>-->
+<!--			<span>本页<span th:text="${(paper.totalPage==paper.pageNow)?(paper.totalSize%paper.pageSize):paper.pageSize}"></span>条</span>-->
+			<div class="show-list text-center" style="font-size: 15px">
+				<table class="table table-bordered table-hover" style='text-align: center;'>
+					<br />
+					<thead>
+						<tr class="text-danger">
+							<th class="text-center">企业账号</th>
+							<th class="text-center">企业名</th>
+							<th class="text-center">企业邮箱</th>
+							<th class="text-center">企业联系人</th>
+							<th class="text-center">企业电话</th>
+							<th class="text-center">企业地址</th>
+							<th class="text-center">操作</th>
+
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="c : ${company}">
+							<td th:text="${c.username}"></td>
+							<td th:text="${c.companyName}"></td>
+							<td th:text="${c.mailbox}"></td>
+							<td th:text="${c.contacts}"></td>
+							<td th:text="${c.phone}"></td>
+							<td th:text="${c.address}"></td>
+							<td>
+								<button class="btn btn-primary"><a th:href="@{/deleteCompany?(cno=${c.username})}" style="text-decoration: none;color: white;">删除</a></button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+<!--				<button class="btn btn-primary"><a style="text-decoration: none;color: white; " th:href="@{SelectProjectInfoServlet?(page=${paper.hasFirst?1:1})}">首页</a></button>-->
+<!--				<button class="btn btn-primary"><a style="text-decoration: none;color: white; " th:href="@{SelectProjectInfoServlet?(page=${paper.hasPre?paper.pageNow-1:1})}">上一页</a></button>-->
+<!--				<button class="btn btn-primary"><a style="text-decoration: none;color: white; " th:href="@{SelectProjectInfoServlet?(page=${paper.hasNext?(paper.pageNow+1):paper.totalPage})}">下一页</a></button>-->
+<!--				<button class="btn btn-primary"><a style="text-decoration: none;color: white; " th:href="@{SelectProjectInfoServlet?(page=${paper.hasLast?paper.totalPage:paper.totalPage})}">尾页</a></button>-->
+			</div>
+		</div>
+
+	</body>
+
+</html>

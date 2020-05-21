@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+
+	<head>
+		<meta charset="UTF-8">
+		<title>学生信息查看</title>
+		<!-- Scripts Starts -->
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+		<script src="../js/jquery-3.3.1.min.js"></script>
+		<script src="../js/bootstrap.min.js"></script>
+		<!-- End JQuery -->
+
+	</head>
+
+	<body>
+		<!--start 学生信息操作列表-->
+		<div class="panel-body">
+			<p>
+				<h3><b>学生信息管理</b></h3>
+			</p>
+			<a href="/insertStudentss"><button type="button" class="btn btn-primary">增加学生</button></a>
+			<br />
+			<br>
+			<div class="show-list text-center" style="font-size: 15px">
+				<table class="table table-bordered table-hover" style='text-align: center;'>
+					<br />
+					<thead>
+						<tr class="text-danger">
+							<th class="text-center">用户账号</th>
+							<th class="text-center">用户名</th>
+							<th class="text-center">用户年级</th>
+							<th class="text-center">用户专业</th>
+							<th class="text-center">用户性别</th>
+							<th class="text-center">用户邮箱</th>
+							<th class="text-center">操作</th>
+
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="s : ${students}">
+							<td th:text="${s.no}"></td>
+							<td th:text="${s.name}"></td>
+							<td th:text="${s.grade}"></td>
+							<td th:text="${s.professional}"></td>
+							<td th:text="${s.gender}"></td>
+							<td th:text="${s.mailbox}"></td>
+							<td>
+								<button class="btn btn-primary"><a th:href="@{/deleteStudentss?(studentNo=${s.no})}" style="text-decoration: none;color: white;">删除</a></button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+<!--				<button class="btn btn-primary"><a style="text-decoration: none;color: white; " th:href="@{SelectProjectInfoServlet?(page=${paper.hasFirst?1:1})}">首页</a></button>-->
+<!--				<button class="btn btn-primary"><a style="text-decoration: none;color: white; " th:href="@{SelectProjectInfoServlet?(page=${paper.hasPre?paper.pageNow-1:1})}">上一页</a></button>-->
+<!--				<button class="btn btn-primary"><a style="text-decoration: none;color: white; " th:href="@{SelectProjectInfoServlet?(page=${paper.hasNext?(paper.pageNow+1):paper.totalPage})}">下一页</a></button>-->
+<!--				<button class="btn btn-primary"><a style="text-decoration: none;color: white; " th:href="@{SelectProjectInfoServlet?(page=${paper.hasLast?paper.totalPage:paper.totalPage})}">尾页</a></button>-->
+			</div>
+		</div>
+		</body>
+
+</html>

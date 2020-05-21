@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>增加学生</title>
+<!-- Scripts Starts -->
+<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+<script src="../js/jquery-3.3.1.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<!-- End JQuery -->
+</head>
+
+<body>
+<div class="panel-body">
+	<form action="/insertStudent" method="post">
+		<p>
+			用户账号:<input type="text" value="" name="no"> 用户姓名:
+			<input type="text" value="" name="name"> 用户年级:
+			<input type="text" value="" name="grade">
+		</p>
+		<p>
+			用户专业:<input type="text" value="" name="professional"> 用户性别:
+			<input type="text" value="" name="gender"> 用户班级:
+			<input type="text" value="" name="class_">
+		</p>
+		<p>
+			用户密码:<input type="password" value="" name="password">
+		</p>
+		<br />
+		<button type="submit" class="btn btn-primary" name="send">增加</button>
+		&nbsp;
+		<button type="reset" name="cz" class="btn btn-primary">重置</button>
+	</form>
+</div>
+</body>
+
+</html>

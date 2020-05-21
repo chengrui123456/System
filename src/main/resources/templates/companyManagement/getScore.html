@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+
+	<head>
+		<meta charset="UTF-8">
+		<title>打分数</title>
+		<link rel="stylesheet" type="text/css" th:href="@{../css/bootstrap/css/bootstrap.min.css}">
+		<script th:src="@{../js/jquery-3.3.1.min.js}"></script>
+		<script th:src="@{../js/bootstrap.min.js}"></script>
+	</head>
+
+	<body>
+		<h3><b>成绩评定</b></h3>
+		<form action="/GetScoreServlet" method="post">
+			<p>
+				学生学号:<input type="text" name="psno" readonly="readonly" th:value="${session.pns.studentNo}">
+			</p>
+			<p>
+				项目编号:<input type="text" name="ppno" readonly="readonly" th:value="${session.pns.projectNo}">
+			</p>
+			<p>
+				分数:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" placeholder="请填写分数" name="score" value="">
+			</p>
+			<br />
+			<button type="submit" class="btn btn-primary">提交</button>
+
+		</form>
+	</body>
+
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+
+	<head>
+		<meta charset="UTF-8">
+		<title>学生项目管理</title>
+		<link rel="stylesheet" type="text/css" th:href="@{../css/bootstrap/css/bootstrap.min.css}">
+		<script th:src="@{../js/jquery-3.3.1.min.js}"></script>
+		<script th:src="@{../js/bootstrap.min.js}"></script>
+		<style type="text/css">
+			a {
+				text-decoration: none;
+			}
+			
+			.NoScoreStudentsProjectList {
+				position: absolute;
+				top: 72px;
+				left: 120px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!--start 公司发布项目列表-->
+		<div class="panel-body">
+			<p>
+				<h3><b>学生项目管理</b></h3>
+			</p>
+			<form method="post" class="allStudentsProjectList" id="NoScoreStudentsProjectList" action="#">
+				<input type="submit" style="background: #428BCA" id="AllList" value="所有学生" class="btn btn-primary sto-btn">
+			</form>
+			<br />
+			<form id="NoScoreStudentsProjectList" class="NoScoreStudentsProjectList" action="#" method="post">
+				<input type="submit" style="background: #428BCA" id="commonList" value="未打分学生" class="btn btn-primary comm-btn">
+			</form>
+			<div>
+				<form class="form-inline" id="find-param" action="/projectScoreFSome" method="post">
+					<div class="form-group">
+						<label for="find-price">项目编号</label>
+						<input type="text" class="form-control" id="find-price" placeholder="请输入项目名称" name="projectNo" >
+					</div>
+					&nbsp;
+<!--					<div class="form-group">-->
+<!--						<label>年级</label>-->
+<!--						<br />-->
+<!--						<select id="find-status" style="width: 100px;height: 32px;" name="status">-->
+<!--							<option value="">-&#45;&#45;请选择-&#45;&#45;</option>-->
+<!--							<option value="0">2016</option>-->
+<!--							<option value="1">2017</option>-->
+<!--							<option value="2">2018</option>-->
+<!--						</select>-->
+<!--					</div>-->
+					&nbsp;&nbsp;
+					<button type="submit" style="margin-top: 25px;" class="btn btn-primary">查询</button>
+				</form>
+			</div>
+
+<!--			<p>当前 <span th:text="${pageInfo.pageNum}"></span> 页,总 <span th:text="${pageInfo.pages}"></span> 页,共 <span th:text="${pageInfo.total}"></span> 条记录</p>-->
+			<div class="show-list text-center" style="font-size: 15px">
+
+				<table class="table table-bordered table-hover" style='text-align: center;'>
+					<thead>
+						<tr class="text-danger">
+							<th class="text-center">学生学号</th>
+							<th class="text-center">项目编号</th>
+							<th class="text-center">选择项目理由</th>
+							<th class="text-center">学生选择时间</th>
+							<th class="text-center">项目分数</th>
+							<th class="text-center">操作</th>
+
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="ps : ${pageInfo.list}">
+							<td th:text="${ps.studentNo}"></td>
+							<td th:text="${ps.projectNo}"></td>
+							<td th:text="${ps.sel_reason}"></td>
+							<td th:text="${ps.company_sel_date}"></td>
+							<td th:text="${ps.score}"></td>
+							<br />
+							<td>
+<!--								<&#45;&#45;-->
+<!--                                	作者：offline-->
+<!--                                	时间：2019-09-24-->
+<!--                                	描述：打分的href需要将其换成th：href=“” 传一个两个参数，学生学号以及项目编号-->
+<!--                                &ndash;&gt;-->
+<!--								<button class="btn btn-primary"><a href="getScore.html"  th:if="${not empty ps.companySelDate}" style="text-decoration: none;color: white;">打分</a></button>-->
+<!--								<button class="btn btn-primary"><a href="#"  th:if="${empty ps.companySelDate}" style="text-decoration: none;color: white;">已打分</a></button>-->
+<!--								<button class="btn btn-primary"><a href="#" th:href="@{....?(psno=${ps.studentNo}&ppno=${projectNo})}" style="text-decoration: none;color: white;disabled="disabled"">退选</a></button>-->
+
+								<button class="btn btn-primary" th:if="${ps.company_sel_date!=null}"><a th:href="@{/updateProjectS?(StudentNo=${ps.studentNo})}"   style="text-decoration: none;color: white;">打分</a></button>
+								<button class="btn btn-primary" th:if="${ps.score!=null}"><a href="#"   style="text-decoration: none;color: white;">已打分</a></button>-->
+								<button class="btn btn-primary" th:if="${ps.score==null}"><a th:href="@{/deleteProjectSelects?(No=${ps.studentNo})}"  style="text-decoration: none;color: white;"disabled="disabled">退选</a></button>
+
+
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<p>当前 <span th:text="${pageInfo.pageNum}"></span> 页,总 <span th:text="${pageInfo.pages}"></span> 页,共 <span th:text="${pageInfo.total}"></span> 条记录</p>
+				<button class="btn btn-primary"><a style="text-decoration: none;color: white; " th:href="@{/allStudentList}">首页</a></button>
+				<button class="btn btn-primary" ><a style="text-decoration: none;color: white; "  th:href="@{/allStudentList(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}">上一页</a></button>
+				<!--<button class="btn btn-primary"><a style="text-decoration: none;color: white; " th:if="${not pagehelper.isIsLastPage()}" th:href="@{allProjectList(start=${pagehelper.getPageNum()+1})}">下一页</a></button>-->
+				<button class="btn btn-primary" ><a style="text-decoration: none;color: white; "  th:href="@{/allStudentList(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}">下一页</a></button>
+				<button class="btn btn-primary"><a style="text-decoration: none;color: white; " th:href="@{/allStudentList(pageNum=${pageInfo.pages})}">尾页</a></button>
+			</div>
+		</div>
+
+	</body>
+
+</html>

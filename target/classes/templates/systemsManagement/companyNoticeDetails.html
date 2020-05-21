@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+
+	<head>
+		<meta charset="UTF-8">
+		<title>企业公告信息操作</title>
+		<!-- Scripts Starts -->
+		<link rel="stylesheet" type="text/css" th:href="@{../css/bootstrap.min.css}">
+		<script th:src="@{../js/jquery-3.3.1.min.js}"></script>
+		<script th:src="@{../js/bootstrap.min.js}"></script>
+		<!-- End JQuery -->
+	</head>
+
+	<body>
+		<!--start 公司信息列表-->
+		<div class="panel-body">
+			<p>
+				<h3><b><span th:text="${Company}"></span>企业公告列表</b></h3>
+			</p>
+			<br>
+				<div class="show-list text-center" style="font-size: 15px">
+				<table class="table table-bordered table-hover" style='text-align: center;'>
+					<br />
+					<thead>
+						<tr class="text-danger">
+							<th class="text-center">公告ID</th>
+							<th class="text-center">公告标题</th>
+							<th class="text-center">公告内容</th>
+							<th class="text-center">公告发布时间</th>
+							<th class="text-center">公告审核时间</th>
+							<th class="text-center">操作</th>
+
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="no : ${pageInfo.list}">
+							<td th:text="${no.No}"></td>
+							<td th:text="${no.name}"></td>
+							<td th:text="${no.introduction}"></td>
+							<td th:text="${no.release_date}"></td>
+							<td th:text="${no.audit_date}"></td>
+							<td>
+								<button class="btn btn-primary" th:if="${no.audit_date==null}"><a href="#"  th:href="@{/updateBySS?(nId=${no.No})}" style="text-decoration: none;color: white;">审核</a></button>
+								<button class="btn btn-primary"><a href="#" th:href="@{/deleteBySS?(nId=${no.No})}" style="text-decoration: none;color: white;">删除</a></button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<p>当前 <span th:text="${pageInfo.pageNum}"></span> 页,总 <span th:text="${pageInfo.pages}"></span> 页,共 <span th:text="${pageInfo.total}"></span> 条记录</p>
+				<button class="btn btn-primary"><a style="text-decoration: none;color: white; " th:href="@{/companyNoticeDetails}">首页</a></button>
+				<button class="btn btn-primary" ><a style="text-decoration: none;color: white; " th:href="@{/companyNoticeDetails(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}">上一页</a></button>
+				<button class="btn btn-primary" ><a style="text-decoration: none;color: white; "  th:href="@{/companyNoticeDetails(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}">下一页</a></button>
+				<button class="btn btn-primary"><a style="text-decoration: none;color: white; " th:href="@{/companyNoticeDetails(pageNum=${pageInfo.pages})}">尾页</a></button>
+			</div>
+		</div>
+	</body>
+
+</html>

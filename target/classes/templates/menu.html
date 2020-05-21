@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+
+	<head>
+		<meta charset="UTF-8">
+		<title>成都大学实训实习系统</title>
+		<!-- Scripts Starts -->
+		<link rel="stylesheet" type="text/css" th:href="@{css/bootstrap.min.css}">
+		<script th:src="@{js/jquery-1.12.2.min.js}"></script>
+		<script th:src="@{js/bootstrap.min.js}"></script>
+		<!-- End JQuery -->
+
+		<style type="text/css">
+			body {
+				margin: 0px;
+				padding: 0px;
+				background-color: rgb(31, 47, 70);
+			}
+			
+			div.menu>ul {
+				margin: 0px;
+				padding: 0px;
+			}
+			
+			div.menu>ul ul {
+				margin: 0px;
+				padding: 0px;
+			}
+			
+			div.menu>ul>li {
+				width: 100%;
+				padding-left: 20px;
+			}
+			
+			div.menu ul a {
+				color: rgb(200, 200, 200);
+				height: 60px;
+				line-height: 60px;
+				display: block;
+				text-decoration: none;
+				font-size: 16px;
+			}
+			
+			div.menu ul a:hover {
+				color: white;
+			}
+		</style>
+	</head>
+
+	<body>
+			<div class="menu">
+		<ul type="none">
+			<li class="con-1"><a class="con1" href="/indexHtml" target="_top" title="点击进入">首页</a></li>
+			<li class="con-2"><a class="con2" href="#">关于我们</a>
+			<li class="con-3"><a class="con3" href="#">学院通知</a>
+			<li class="con-4"><a class="con4" href="#">企业公告</a></li>
+			<li class="con-5"><a class="con5" href="#">企业信息</a></li>
+	        <li class="con-6"><a class="con6" href="#">资料下载</a></li>
+		</ul>
+	</div>
+
+
+	<script>
+	//菜单的展开
+    $(document).ready(function() {
+        $(".con6").mouseover(function() {
+            $('.con-1').css("background-color","rgb(31,47,70)");
+            $('.con-2').css("background-color","rgb(31,47,70)");
+            $('.con-3').css("background-color","rgb(31,47,70)");
+            $('.con-4').css("background-color","rgb(31,47,70)");
+            $('.con-5').css("background-color","rgb(31,47,70)");
+            $('.con-6').css("background-color","rgb(26,41,64)");
+        });
+        $(".con1").mouseover(function() {
+            $('.con-6').css("background-color","rgb(31,47,70)");
+            $('.con-2').css("background-color","rgb(31,47,70)");
+            $('.con-3').css("background-color","rgb(31,47,70)");
+            $('.con-4').css("background-color","rgb(31,47,70)");
+            $('.con-5').css("background-color","rgb(31,47,70)");
+            $('.con-1').css("background-color","rgb(26,41,64)");
+        });
+        $(".con2").mouseover(function() {
+            $('.con-1').css("background-color","rgb(31,47,70)");
+            $('.con-6').css("background-color","rgb(31,47,70)");
+            $('.con-3').css("background-color","rgb(31,47,70)");
+            $('.con-4').css("background-color","rgb(31,47,70)");
+            $('.con-5').css("background-color","rgb(31,47,70)");
+            $('.con-2').css("background-color","rgb(26,41,64)");
+        });
+        $(".con3").mouseover(function() {
+            $('.con-1').css("background-color","rgb(31,47,70)");
+            $('.con-2').css("background-color","rgb(31,47,70)");
+            $('.con-6').css("background-color","rgb(31,47,70)");
+            $('.con-4').css("background-color","rgb(31,47,70)");
+            $('.con-5').css("background-color","rgb(31,47,70)");
+            $('.con-3').css("background-color","rgb(26,41,64)");
+        });
+        $(".con4").mouseover(function() {
+            $('.con-1').css("background-color","rgb(31,47,70)");
+            $('.con-2').css("background-color","rgb(31,47,70)");
+            $('.con-3').css("background-color","rgb(31,47,70)");
+            $('.con-6').css("background-color","rgb(31,47,70)");
+            $('.con-5').css("background-color","rgb(31,47,70)");
+            $('.con-4').css("background-color","rgb(26,41,64)");
+        });
+        $(".con5").mouseover(function() {
+            $('.con-1').css("background-color","rgb(31,47,70)");
+            $('.con-2').css("background-color","rgb(31,47,70)");
+            $('.con-3').css("background-color","rgb(31,47,70)");
+            $('.con-4').css("background-color","rgb(31,47,70)");
+            $('.con-6').css("background-color","rgb(31,47,70)");
+            $('.con-5').css("background-color","rgb(26,41,64)");
+        });
+    });
+	</script>
+		
+	</body>
+
+</html>

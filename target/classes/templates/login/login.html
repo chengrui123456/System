@@ -1,0 +1,484 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+
+<head>
+	<meta charset="UTF-8">
+	<title>实训系统</title>
+	<link rel="icon" type="image/x-icon" th:href="@{../images/favicon1.ico}">
+	<link rel="stylesheet" type="text/css"  th:href="@{../css/bootstrap.min.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{../css/login.css}">
+	<script th:src="@{../js/jquery-3.3.1.min.js}"></script>
+	<script type="text/javascript" th:src="@{../js/login.js}"></script>
+	<!--<script type="text/javascript">
+        function refresh() {
+            //IE存在缓存,需要new Date()实现更换路径的作用
+            document.getElementById("image").src = "image.jsp?" + Math.random(); //new Date();//Math.random();
+        }
+    </script>-->
+</head>
+
+<body>
+<!-- 隐藏控件提示 -->
+<input type="hidden" id="errormsg" name="errormsg" value="">
+<!-- 顶部 -->
+<div class="topBar">
+	<div class="top-fluid comWidth">
+		<div class="toplogo left">
+			<a href="javascript:void(0);"><img src="../images/cdu-logo-footer.png" alt="Logo"></a>
+		</div>
+		<div class="toptitle left">
+			<a href="../index.html" class="top-brand"> 成都大学信工学院|实训实习系统 </a>
+		</div>
+	</div>
+	<!-- /top-fluid -->
+</div>
+<!-- End topBar -->
+
+<!-- 登录模块 -->
+<div class="login">
+	<div class="stone"></div>
+	<div class="login-card">
+		<!-- 头部 -->
+		<div class="login-head">
+			<div class="loginlogo">
+				<a href="javascript:void(0);"><img src="../images/logo-computer.jpg" alt="Logo"></a>
+			</div>
+			<h3>
+				成都大学|信工学院<span><strong>实训实习系统</strong></span>
+			</h3>
+		</div>
+		<!-- 身体 -->
+		<form action="Login/login" method="post" id="loginForm" name="loginForm" class="sign-form" onsubmit="return checkUser();">
+			<p>用户名：</p>
+			<p>
+				<input type="text" required="required" placeholder="请输入用户名" class="sign-text" id="s-text" name="userName" value="">
+			</p>
+			<br>
+			<p>密码：</p>
+			<p>
+				<input type="password" required="required" placeholder="请输入密码" class="sign-password" id="s-password" name="password" value="">
+			</p>
+			<br>
+			<p>验证码：</p>
+			<p>
+				<input type="text" required="required" id="s-code" placeholder="请输入验证码" class="sign-sure" name="code" maxlength="4">
+				<!--<img id="image" border="0" onclick="refresh()" class="img-sure" src="image.jsp" title="点击更换图片">-->
+				<canvas id="canvas" width="60" height="24" onclick="refresh()" style="border: 1px solid #ccc;border-radius: 5px;"></canvas>
+				<!-- 隐藏控件 存储图形验证码 -->
+				<input type="hidden" id="imageHidden" name="imageHidden">
+			</p>
+			<br>
+			<p>
+				<!--用户角色-->
+			<div class="login_select">
+				<label class="control-label ">用户角色 : </label>
+
+				<!--Inline Radio button-->
+				<label class="radio-inline"> <input type="radio"
+													name="role" checked="1" id="inlineRadio1" value="1"> <span
+						for="inlineRadio1">企业</span></label> <label class="radio-inline">
+				<input type="radio" name="role" id="inlineRadio2" value="2">
+				<span for="inlineRadio2">学生</span>
+			</label> <label class="radio-inline"> <input type="radio"
+														 name="role" id="inlineRadio3" value="9"> <span
+					for="inlineRadio3">管理员</span></label>
+			</div>
+			</p>
+			<!-- 底部 -->
+			<div class="pmd-card-footer">
+				<div class="form-group">
+					<div class="checkbox left">
+						<label class="pmd-checkbox"> <input name="remeberme" type="checkbox"> <span class="pmd-checkbox">记住密码</span>
+						</label>
+					</div>
+					<span class="forgot-password right"> <a
+							href="javascript:void(0);">忘记密码?</a>
+							</span>
+				</div>
+				<button type="submit" class="btn-block">登录</button>
+				<p class="redirection-link">
+					还没有企业账户？
+					<a href="javascript:void(0);" class="login-register">注册</a>.
+				</p>
+			</div>
+			<!-- pmd-card-footer -->
+		</form>
+	</div>
+	<!-- /login-body -->
+</div>
+<!-- /login-card -->
+
+<!-- 忘记密码模块 -->
+<div class="login-card1" id="card1">
+	<!-- 头部 -->
+	<div class="login-head">
+		<div class="loginlogo">
+			<a href="javascript:void(0);"><img src="../images/logo-computer.jpg" alt="Logo"></a>
+		</div>
+		<h3 style="text-align: center; font-family: '宋体';">
+			找回密码&nbsp;&nbsp;&nbsp;
+			<p
+					style="font-size: 10px; color: rgb(119, 119, 119); padding-right: 25px;">请提交您的电子邮件地址，我们会向您发</p>
+			<p
+					style="font-size: 10px; color: rgb(119, 119, 119); padding-right: 25px;">送一个链接来重置密码.</p>
+		</h3>
+	</div>
+	<!-- 身体 -->
+	<div class="login-body">
+		<form action="ResetPassServlet" method="post" id="login-forget-Form" name="login-forget-Form" class="sign-form" onsubmit="return checkfUser();">
+			<p>邮箱地址：</p>
+			<p>
+				<input type="text" required="required" placeholder="请输入邮箱" class="f-sign-mail" id="f-text" name="mbemail" value="">&nbsp;&nbsp;
+				<a href="javascript:void(0);" class="send" style="text-decoration: none;">发送验证码</a>
+			</p>
+			<br>
+			<p>验证码：</p>
+			<!-- 隐藏控件 -->
+			<input type="hidden" id="rvchidden" name="rvchidden">
+			<p>
+				<input type="text" placeholder="请输入验证码" required="required" class="f-sign-code" id="rvcinAction" name="rvcinAction">
+			</p>
+			<br>
+			<p>用户密码：</p>
+			<p>
+				<input type="password" required="required" placeholder="请输入用户密码" class="sign-password" id="f-password" name="f-repassword">
+			</p>
+			<br>
+			<p>再次输入密码：</p>
+			<p>
+				<input type="password" required="required" placeholder="确认密码" class="sign-password" id="f-surepassword" name="f-surepassword">
+			</p>
+			<p><span id="fsurepassword" style="color:red; font-size:12px;"></span></p>
+			<br>
+			<!-- 底部 -->
+			<div class="pmd-card-footer">
+				<button type="submit" class="btn-block">提交</button>
+				<p class="redirection-link">
+					已经找回密码？
+					<a href="javascript:void(0);" class="relogin">返回登录</a>.
+				</p>
+			</div>
+			<!-- pmd-card-footer -->
+		</form>
+	</div>
+	<!-- /login-body -->
+</div>
+<!-- /login-card1 -->
+
+<!-- 企业注册模块 -->
+<div class="login-card2">
+	<!-- 头部 -->
+	<div class="login-head">
+		<div class="loginlogo">
+			<a href="javascript:void(0);"><img src="../images/logo-computer.jpg" alt="Logo"></a>
+		</div>
+		<h3 class="head-rediretion-text">
+			<span><strong>实训企业注册</strong></span>
+		</h3>
+	</div>
+	<!-- 身体 -->
+	<div class="login-body">
+		<form action="RegistCompanyServlet" method="post" id="login-redirection-Form" name="login-redirection-Form" class="sign-form" onsubmit="return checkrUser();">
+			<p>注册邀请码：</p>
+			<p>
+				<input type="text" required="required" placeholder="请输入邀请码" class="r-incode r-sign" id="r-text" name="vscode" value="">
+			</p>
+			<br>
+			<p>企业名称：</p>
+			<p>
+				<input type="text" required="required" placeholder="请输入企业名称" class="r-companyname r-sign" id="r-name" name="companyName" value="">
+			</p>
+			<br>
+			<p>企业账号：</p>
+			<p>
+				<input type="text" required="required" placeholder="请输入企业账号" class="r-userid r-sign" id="r-userid" name="userName" value="">
+			</p>
+			<br>
+			<p>用户密码：</p>
+			<p>
+				<input type="password" required="required" placeholder="请输入用户密码" class="r-password r-sign" id="r-password" name="cpmpanyPassword" value="">
+			</p>
+			<br>
+			<p>再次输入密码：</p>
+			<p>
+				<input type="password" required="required" placeholder="确认密码" class="r-surepassword r-sign box" name="r-surepassword" id="r-surepassword" value=""></p>
+			<p><span id="rsurepassword" style="color: red; font-size:12px;"></span>
+			</p>
+			<br>
+			<p>密保邮箱：</p>
+			<p>
+				<input type="text" required="required" placeholder="密保邮箱" class="r-sign-mail" id="r-mail" name="mailbox" value="">&nbsp;&nbsp;
+				<a href="javascript:void(0);" class="mailtext" style="text-decoration: none;">发送验证码</a>
+			</p>
+			<br>
+			<p>验证码：</p>
+			<p>
+				<input type="password" readonly="readonly" placeholder="暂时废弃" class="r-sign-code" id="r-code" name="r-code" value="">
+			</p>
+			<br>
+			<!-- 底部 -->
+			<div class="pmd-card-footer">
+				<button type="submit" class="btn-block r-block">注册</button>
+				<p class="redirection-link">
+					已经有企业账户？
+					<a href="javascript:void(0);" class="relogin">返回登录</a>.
+				</p>
+			</div>
+			<!-- pmd-card-footer -->
+		</form>
+	</div>
+	<!-- /login-body -->
+</div>
+<!-- /login-card2 -->
+</div>
+<!-- /login -->
+
+<!-- End 登录模块 -->
+
+<!-- 底部 -->
+<div class="bottom">
+	<div class="bottom-fluid">
+		<ul class="bottom-ul">
+			<li class="left bottom-text1"><span class="login-bottom-text">信息科学与工程学院
+						&copy; 2019. 版权所有.</span>
+				<h3 class="login-bottoml-text">
+					技术支持 BY <a href="http://computer.cdu.edu.cn/" target="_blank">我的老师.</a>
+				</h3></li>
+			<li class="right bottom-text2">
+				<a href="javascript：void(0);">
+					<div>
+						<i class="">settings</i>
+					</div>
+					<div>
+						<span class="login-bottom-text">Version- 1.0.0</span>
+						<h3 class="login-bottoml-text">By 信工学院学生</h3>
+					</div>
+				</a>
+			</li>
+			<li class="right bottom-text3">
+				<a href="mailto:support@propeller.in">
+					<div>
+						<i class="">email</i>
+					</div>
+					<div>
+						<span class="login-bottom-text">For Support</span>
+						<h3 class="login-bottoml-text">1198700287@qq.com</h3>
+					</div>
+				</a>
+			</li>
+		</ul>
+	</div>
+</div>
+<!-- End 底部 -->
+
+<script>
+			//三个页面转换
+			$(document).ready(function() {
+				//点击注册
+				$(".login-register").click(function() {
+					$('.login-card').hide();
+					$('.login-card1').hide();
+					$('.login-card2').show();
+				});
+				//忘记密码
+				$(".forgot-password").click(function() {
+					$('.login-card').hide();
+					$('.login-card1').show();
+					$('.login-card2').hide();
+				});
+				//返回登录
+				$(".relogin").click(function() {
+					$('.login-card').show();
+					$('.login-card1').hide();
+					$('.login-card2').hide();
+				});
+			});
+
+			//发送邮件
+			// 		$(document).ready(function(){
+			// 			  htmlobj=$.ajax({url:"/CduSystem/Login/IndetifyCodeServlet",async:false});
+			// 			 // $("#vcinAction").html(htmlobj.responseText);
+			// 			  $("#vchidden").val(htmlobj.responseText);
+			// 		});
+
+			$(document).ready(function() {
+				$(".send").click(function() {
+					//		 获取页面输入的email，将其作为参数传递到后台servlet中进行处理，得到的验证码在页面存放起来。
+					var mbemail = $("#f-text").val();
+					alert($("#f-text").val());
+					htmlobj = $.ajax({
+						url: "/CduSystem/Login/IdentifyCodeByEmailServlet?mbemail=" + mbemail,
+						async: false
+					});
+					$("#rvchidden").val(htmlobj.responseText);
+					//alert($("#rvchidden").val());
+				})
+			});
+
+			var result = document.getElementById("errormsg").value;
+			if(result != "") {
+				alert(result);
+			}
+
+			function fsurepassword() {
+				var pass1 = document.getElementById("f-password").value;
+				var pass2 = document.getElementById("f-surepassword").value;
+				if(pass1 == pass2) {
+					document.getElementById("fsurepassword").innerHTML = "";
+				} else {
+					document.getElementById("fsurepassword").innerHTML = "×密码不一致"
+				}
+			}
+
+			function rsurepassword() {
+				var pass1 = document.getElementById("r-password").value;
+				var pass2 = document.getElementById("r-surepassword").value;
+				if(pass1 == pass2) {
+					document.getElementById("rsurepassword").innerHTML = "";
+				} else {
+					document.getElementById("rsurepassword").innerHTML = "×密码不一致"
+				}
+			}
+
+			window.onload = function() {
+				setInterval("fsurepassword()", 100);
+				setInterval("rsurepassword()", 100);
+			}
+
+			/**
+			 * 登录界面优化
+			 */
+
+			//相关登录界面改善
+
+			//登录界面
+
+			function checkUser() {
+				var result1 = document.getElementById("s-text").value;
+				var result2 = document.getElementById("s-password").value;
+				var result3 = document.getElementById("s-code").value;
+				if(result1 == "") {
+					alert("账号不能为空");
+					return false;
+				} else if(result2 == "") {
+					alert("密码不能为空");
+					return false;
+				} else if(result3 == "") {
+					alert("验证码不能为空");
+					return false;
+				} else {
+					return true;
+				}
+			}
+
+			//注册界面
+
+			function checkrUser() {
+				var result1 = document.getElementById("r-text").value;
+				var result = document.getElementById("r-name").value;
+				var password = document.getElementById("r-password").value;
+				var password1 = document.getElementById("r-surepassword").value;
+				if(result1 == "") {
+					alert("邀请码不能为空");
+					return false;
+				} else if(result == "") {
+					alert("用户名不能为空");
+					return false;
+				} else if(password == "") {
+					alert("密码不能为空");
+					return false;
+				} else if(password != password1) {
+					alert("两次密码不一致");
+					return false;
+				} else {
+					return true;
+				}
+			}
+
+			//忘记密码界面
+			function checkfUser() {
+				var result1 = document.getElementById("rvcinAction").value;
+				var password = document.getElementById("f-password").value;
+				var password1 = document.getElementById("f-surepassword").value;
+				if(result1 == "") {
+					alert("验证码不能为空");
+					return false;
+				} else if(password == "") {
+					alert("密码不能为空");
+					return false;
+				} else if(password != password1) {
+					alert("两次密码不一致");
+					return false;
+				} else {
+					return true;
+				}
+			}
+
+			//图形验证码
+		var show_num = [];
+ 		draw(show_num);
+ 		var num = show_num.join("");
+ 		document.getElementById("imageHidden").value=num;
+
+		function refresh() {
+			draw(show_num);
+			var num = show_num.join("");
+			document.getElementById("imageHidden").value=num;
+		}
+		function draw(show_num) {
+        var canvas_width=document.getElementById('canvas').clientWidth;
+        var canvas_height=document.getElementById('canvas').clientHeight;
+        var canvas = document.getElementById("canvas");//获取到canvas的对象，演员
+        var context = canvas.getContext("2d");//获取到canvas画图的环境，演员表演的舞台
+        canvas.width = canvas_width;
+        canvas.height = canvas_height;
+        var sCode = "1,2,3,4,5,6,7,8,9,0";
+        var aCode = sCode.split(",");
+        var aLength = aCode.length;//获取到数组的长度
+
+        for (var i = 0; i <= 3; i++) {
+            var j = Math.floor(Math.random() * aLength);//获取到随机的索引值
+            var deg = Math.random() * 30 * Math.PI / 180;//产生0~30之间的随机弧度
+            var txt = aCode[j];//得到随机的一个内容
+            show_num[i] = txt;
+			var x = 5 + i *12; //文字在canvas上的x坐标
+			var y = 15 + Math.random() * 2; //文字在canvas上的y坐标
+			context.font = "bold 15px 微软雅黑";
+
+            context.translate(x, y);
+            context.rotate(deg);
+
+            context.fillStyle = randomColor();
+            context.fillText(txt, 0, 0);
+
+            context.rotate(-deg);
+            context.translate(-x, -y);
+        }
+        for (var i = 0; i <= 5; i++) { //验证码上显示线条
+            context.strokeStyle = randomColor();
+            context.beginPath();
+            context.moveTo(Math.random() * canvas_width, Math.random() * canvas_height);
+            context.lineTo(Math.random() * canvas_width, Math.random() * canvas_height);
+            context.stroke();
+        }
+        for (var i = 0; i <= 30; i++) { //验证码上显示小点
+            context.strokeStyle = randomColor();
+            context.beginPath();
+            var x = Math.random() * canvas_width;
+            var y = Math.random() * canvas_height;
+            context.moveTo(x, y);
+            context.lineTo(x + 1, y + 1);
+            context.stroke();
+        }
+    }
+	function randomColor() {//得到随机的颜色值
+        var r = Math.floor(Math.random() * 256);
+        var g = Math.floor(Math.random() * 256);
+        var b = Math.floor(Math.random() * 256);
+        return "rgb(" + r + "," + g + "," + b + ")";
+    }
+		</script>
+</body>
+
+</html>

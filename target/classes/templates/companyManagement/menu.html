@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" type="text/css" th:href="@{../css/menu.css}">
+	<title>管理菜单</title>
+	<style type="text/css">
+	</style>
+	<script>
+		function $(_sId) {
+			return document.getElementById(_sId);
+		}
+
+		function exist(_sId) {
+			var oObj = $(_sId);
+			return oObj != null ? oObj : false;
+		}
+
+		function dw(_sTxt) {
+			document.write(_sTxt);
+		}
+
+		function hide(_sId) {
+			$(_sId).style.display = $(_sId).style.display == "none" ? "" : "none";
+		}
+
+		function onlyShow(_sId, _iNum, _sPic, _sTxt1, _sTxt2) {
+			var i = 0;
+			var oCurr = exist(_sId + i);
+			while(oCurr) {
+				oCurr.style.display = "none";
+				$(_sPic + i).src = _sTxt2;
+				i++;
+				oCurr = exist(_sId + i)
+			}
+			$(_sId + _iNum).style.display = "";
+			$(_sPic + _iNum).src = _sTxt1;
+		}
+
+		function swapShow(_sId) {
+			var i = 0;
+			var oCurr = exist(_sId + i);
+			while(oCurr) {
+				hide(_sId + i);
+				i++;
+				oCurr = exist(_sId + i)
+			}
+		}
+
+		function seekKey(_sKey) {
+			var i = 0;
+			while(exist(_sKey + i)) {
+				i++;
+			}
+			return i;
+		}
+
+		function swapPic(_sId, _sAttr, _sTxt1, _sTxt2) {
+			$(_sId)[_sAttr] = $(_sId)[_sAttr].indexOf(_sTxt1) > -1 ? _sTxt2 : _sTxt1;
+		}
+
+		function swap(_sId, _sAttr, _sTxt1, _sTxt2) {
+			$(_sId)[_sAttr] = $(_sId)[_sAttr] == _sTxt1 ? _sTxt2 : _sTxt1;
+		}
+
+		function moveGif(_sId) {
+			swap(_sId, 'className', 'marginLeft2', '');
+		}
+
+		function moveStart(_sId) {
+			__tmp__time = setInterval("moveGif('" + _sId + "')", 200);
+		}
+
+		function moveStop(_sId) {
+			clearInterval(__tmp__time);
+			$(_sId).className = "marginLeft2";
+		}
+
+		function switchShow() {
+			hide('left');
+			swapPic('arrow', 'src', 'http://image2.sina.com.cn/blog/tmpl/v3/control/images/control_switch_up.gif', 'http://image2.sina.com.cn/blog/tmpl/v3/control/images/control_switch_down.gif');
+			swapShow('hideLeft');
+			swapShow('hideBody');
+		}
+	</script>
+</head>
+
+<body>
+<table align="left" class="common" width="100%" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+		<td height="50" align="left" valign="top">
+			<!-- 控制面板菜单 -->
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" class="ctrl_menu">
+				<!-- User info -->
+				<tr>
+					<li class="user" style="background: rgb(31, 47, 70); list-style: none; width: 100%;padding-left: 20px;">
+						<a aria-expanded="false" data-toggle="dropdown" class="btn-user dropdown-toggle media" data-sidebar="true" aria-expandedhref="javascript:void(0);">
+							<div class="media-left">
+								<img th:src="@{../images/user-icon.png}" alt="New User">
+							</div>
+							<div class="user-body"><span th:text="${session.account}"></span></div>
+						</a>
+					</li>
+				</tr>
+				<!-- End user info -->
+				<tr height="5">
+					<td></td>
+				</tr>
+				<tr height="5">
+					<td></td>
+				</tr>
+				<tr>
+					<td align="center">
+						<!-- 首页 -->
+						<table width="100%" border="0" cellspacing="0" cellpadding="0" class="ctrl_menu_title_bg">
+							<tr class="hand">
+								<td width="174" class="ctrl_menu_title">
+									<a href="/homePageHtml" target="homepage" style="text-decoration: none;">首页</a>
+								</td>
+							</tr>
+						</table>
+						<!-- /首页 -->
+					</td>
+				</tr>
+				<tr height="5">
+					<td></td>
+				</tr>
+				<tr>
+					<td align="center">
+						<!-- 公司信息 -->
+						<table width="100%" border="0" cellspacing="0" cellpadding="0" class="ctrl_menu_title_bg">
+							<tr class="hand" onClick="hide('hideMenuFunc3')">
+								<td width="174" class="ctrl_menu_title" style="color: white;">公司信息管理</td>
+								<td width="21">
+									<image id='MenuFunc3' th:src="@{../images/menu_title_down.png}">
+								</td>
+							</tr>
+							<tr id="hideMenuFunc3">
+								<td align="left" colspan="2" class="menu_box_pad">
+									<table width="100%" border="0" cellspacing="5" cellpadding="0" class="menu_box">
+										<tr>
+											<th> </th>
+											<td>
+												<a href="/ListCompanyInfo" target="homepage" >公司信息维护</a>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+						<!-- /公司信息 -->
+					</td>
+				</tr>
+				<tr height="5">
+					<td></td>
+				</tr>
+				<tr>
+					<td align="center">
+						<!-- 方案信息管理 -->
+						<table width="100%" border="0" cellspacing="0" cellpadding="0" class="ctrl_menu_title_bg">
+							<tr class="hand" onClick="hide('hideMenuFunc2')">
+								<td width="174" class="ctrl_menu_title">方案信息管理</td>
+								<td width="21">
+									<image id='MenuFunc2' th:src="@{../images/menu_title_down.png}">
+								</td>
+							</tr>
+							<tr id="hideMenuFunc2">
+								<td align="left" colspan="2" class="menu_box_pad">
+									<table width="100%" border="0" cellspacing="5" cellpadding="0" class="menu_box">
+										<tr>
+											<th> </th>
+											<td>
+												<a href="/releaseProjectHtml" target="homepage" >方案发布</a>
+											</td>
+										</tr>
+										<tr>
+											<th> </th>
+											<td>
+												<a href="/allProjectList" target="homepage" >方案维护</a>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+						<!-- /方案信息管理 -->
+					</td>
+				</tr>
+				<tr height="5">
+					<td></td>
+				</tr>
+				<tr>
+					<td align="center">
+						<!-- 学生方案管理 -->
+						<table width="100%" border="0" cellspacing="0" cellpadding="0" class="ctrl_menu_title_bg">
+							<tr class="hand" onClick="hide('hideMenuFunc1')">
+								<td width="174" class="ctrl_menu_title">学生方案管理</td>
+								<td width="21">
+									<image id='MenuFunc1' th:src="@{../images/menu_title_down.png}">
+								</td>
+							</tr>
+							<tr id="hideMenuFunc1" style="display:none">
+								<td align="left" colspan="2" class="menu_box_pad">
+									<table width="100%" border="0" cellspacing="5" cellpadding="0" class="menu_box">
+										<tr>
+											<th> </th>
+											<td>
+												<a target="homepage" href="/allStudentList" >学生(成绩、退选)</a>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+						<!-- /公告管理 -->
+					</td>
+				</tr>
+				<tr height="5">
+					<td></td>
+				</tr>
+				<tr>
+					<td align="center">
+						<!-- 公告管理 -->
+						<table width="100%" border="0" cellspacing="0" cellpadding="0" class="ctrl_menu_title_bg">
+							<tr class="hand" onClick="hide('hideMenuFunc4')">
+								<td width="174" class="ctrl_menu_title">公告信息管理</td>
+								<td width="21">
+									<image id='MenuFunc1' th:src="@{../images/menu_title_down.png}">
+								</td>
+							</tr>
+							<tr id="hideMenuFunc4" style="display:none">
+								<td align="left" colspan="2" class="menu_box_pad">
+									<table width="100%" border="0" cellspacing="5" cellpadding="0" class="menu_box">
+										<tr>
+											<th> </th>
+											<td>
+												<a target="homepage" href="/releaseNoticeHtml" >公告发布</a>
+											</td>
+										</tr>
+										<tr>
+											<th> </th>
+											<td>
+												<a target="homepage" href="/companyNoticeInfo">公告维护</a>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+						<!-- /公告管理 -->
+					</td>
+				</tr>
+				<tr height="5">
+					<td></td>
+				</tr>
+				<tr>
+					<td align="center">
+						<!-- 注销 -->
+						<table width="100%" border="0" cellspacing="0" cellpadding="0" class="ctrl_menu_title_bg">
+							<tr class="hand">
+								<td width="174" class="ctrl_menu_title">
+									<a href="../exitLogin" target="_top" style="text-decoration: none;">注销</a>
+								</td>
+							</tr>
+						</table>
+						<!-- /注销 -->
+					</td>
+				</tr>
+				<tr height="5">
+					<td></td>
+				</tr>
+			</table>
+</body>
+
+</html>

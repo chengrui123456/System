@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+
+	<head>
+		<meta charset="UTF-8">
+		<title>企业公告信息操作</title>
+		<!-- Scripts Starts -->
+		<link rel="stylesheet" type="text/css" th:href="@{../css/bootstrap.min.css}">
+		<script th:src="@{../js/jquery-3.3.1.min.js}"></script>
+		<script th:src="@{../js/bootstrap.min.js}"></script>
+		<!-- End JQuery -->
+	</head>
+
+	<body>
+		<!--start 公司信息列表-->
+		<div class="panel-body">
+			<p>
+				<h3><b>学生选课信息列表</b></h3>
+			</p>
+				<a href="#"><input type="button" style="background: #428BCA" id="commonList" value="导出列表" class="btn btn-primary comm-btn"></a>
+			<br />
+			<br />
+			<div>
+				<form class="form-inline" id="find-param" action="/findProjectSelectSomes" method="post">
+					<div class="form-group">
+						<label for="find-price">专业名称</label>
+						<input type="text" class="form-control" id="find-price" placeholder="请输入项目名称" name="classs" >
+					</div>
+					&nbsp;
+					<div class="form-group">
+						<label>年级</label>
+						<select id="find-status" style="width: 100px;height: 32px;" name="grade">
+							<option value="">---请选择---</option>
+							<option value="0">2016</option>
+							<option value="1">2017</option>
+							<option value="2">2018</option>
+						</select>
+					</div>
+					&nbsp;&nbsp;
+					<button type="submit" style="" class="btn btn-primary">查询</button>
+				</form>
+				<br>
+				<div class="show-list text-center" style="font-size: 15px">
+					<table class="table table-bordered table-hover" style='text-align: center;'>
+						<br />
+						<thead>
+							<tr class="text-danger">
+								<th class="text-center">学生学号</th>
+								<th class="text-center">项目编号</th>
+								<th class="text-center">企业选择日期</th>
+								<th class="text-center">学生分数</th>
+								<th class="text-center">企业名字</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="syp : ${pageInfo.list}">
+								<td th:text="${syp.studentNo}"></td>
+								<td th:text="${syp.projectNo}"></td>
+								<td th:text="${syp.company_sel_date}"></td>
+								<td th:text="${syp.score}"></td>
+								<td th:text="${syp.company_name}"></td>
+							</tr>
+						</tbody>
+					</table>
+					<p>当前 <span th:text="${pageInfo.pageNum}"></span> 页,总 <span th:text="${pageInfo.pages}"></span> 页,共 <span th:text="${pageInfo.total}"></span> 条记录</p>
+					<button class="btn btn-primary"><a style="text-decoration: none;color: white; " th:href="@{/systemsProjectInfos}">首页</a></button>
+					<button class="btn btn-primary" ><a style="text-decoration: none;color: white; " th:href="@{/systemsProjectInfos(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}">上一页</a></button>
+					<button class="btn btn-primary" ><a style="text-decoration: none;color: white; "  th:href="@{/systemsProjectInfos(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}">下一页</a></button>
+					<button class="btn btn-primary"><a style="text-decoration: none;color: white; " th:href="@{/systemsProjectInfos(pageNum=${pageInfo.pages})}">尾页</a></button>
+				</div>
+			</div>
+	</body>
+
+</html>

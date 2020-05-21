@@ -1,0 +1,325 @@
+@charset "UTF-8";
+body {
+	margin: 0px;
+	padding: 0px;
+	background: url(../images/propeller-bg.jpg) no-repeat;
+	background-size: cover;
+	height: unset
+}
+
+h1, h2, h3, h4, h5, h6, p, ol, ul {
+	margin: 0px;
+}
+
+div {
+	margin: 0px;
+	padding: 0px;
+}
+
+a {
+	text-decoration: none;
+}
+
+ul li {
+	margin: 0px;
+	padding: 0px;
+	list-style-type: none;
+}
+
+img {
+	border: 0px;
+	border-style: none;
+	vertical-align: middle;
+}
+
+.comWidth {
+	width: 998px;
+	margin: 0px auto;
+}
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
+.clear {
+	clear: left;
+}
+
+.topBar {
+	width: 100%;
+	height: 110px;
+	position: fixed;
+	background: rgb(66, 133, 244);
+	box-shadow: 8px 8px 5px #444444;
+}
+
+.toplogo {
+	padding-top: 15px;
+}
+
+.toptitle {
+	padding-top: 40px;
+	font-size: 24px;
+	font-weight: bold;
+}
+
+.toptitle a {
+	text-decoration: none;
+	color: white;
+}
+
+.stone {
+	height: 130px;
+}
+
+.login-card {
+	display: block;
+	width: 360px;
+	height: 100%;
+	border-radius: 3px;
+	background-color: white;
+	margin: 0px auto 45px;
+	border-radius: 3px;
+}
+
+.loginlogo {
+	margin: 0px auto 25px;
+	padding-top: 50px;
+	height: 136px;
+	width: 86px;
+}
+
+.loginlogo img {
+	height: 100%;
+	width: 100%;
+}
+
+.login-head h3 {
+	margin-left: 50px;
+	font-size: 16px;
+	font-family: "宋体";
+}
+
+.login-head span {
+	font-size: 18px;
+	font-weight: bold;
+	font-family: "微软雅黑";
+}
+
+/*登录模块样式 */
+.sign-form {
+	margin: 40px 0px 0px 40px;
+}
+
+.sign-text {
+	height: 24px;
+	line-height: 24px;
+	width: 292px;
+	padding-left: 10px;
+	border: 2px solid grey;
+	outline: none;
+	font-size: 16px;
+}
+
+.sign-password {
+	height: 24px;
+	line-height: 24px;
+	width: 292px;
+	padding-left: 10px;
+	border: 2px solid grey;
+	outline: none;
+	font-size: 16px;
+}
+
+.sign-sure {
+	height: 24px;
+	line-height: 24px;
+	width: 230px;
+	padding-left: 10px;
+	border: 2px solid grey; /*#008842*/
+	outline: none;
+	font-size: 16px;
+}
+
+.sign-submit {
+	height: 30px;
+	width: 57px;
+	background: #008842;
+	font-family: "微软雅黑";
+	font-size: 20px;
+}
+
+.sign-img {
+	float: left;
+}
+
+.form-group {
+	width: 280px;
+	height: 50px;
+	margin-top: 30px;
+}
+
+.forgot-password a {
+	text-decoration: none;
+	color: black;
+	rgb(74,204,142);
+}
+
+.forgot-password a:hover {
+	color: rgb(74, 204, 142);
+}
+
+.btn-block {
+	height: 35px;
+	line-height: 35px;
+	width: 292px;
+	padding-left: 10px;
+	outline: none;
+	background-color: rgb(66, 133, 244);
+	font-size: 16px;
+	color: white;
+	cursor: pointer;
+}
+
+.redirection-link {
+	margin: 20px 0px 46px 50px;
+	color: grey;
+}
+
+.redirection-link a {
+	text-decoration: none;
+	color: black;
+}
+
+.redirection-link a:hover {
+	color: blue;
+}
+
+.img-sure {
+	/*crosshair:十字光标
+  help:加一个小问号
+  wait:旋转光圈
+ */
+	cursor: crosshair;
+}
+
+/* 忘记密码模块样式 */
+.login-card1 {
+	display: none;
+	width: 360px;
+	height: 100%;
+	border-radius: 3px;
+	background-color: white;
+	margin: 0px auto 45px;
+}
+
+.f-sign-mail {
+	height: 24px;
+	line-height: 24px;
+	width: 210px;
+	padding-left: 10px;
+	border: 2px solid grey;
+	outline: none;
+	font-size: 16px;
+}
+
+.f-sign-code {
+	height: 24px;
+	line-height: 24px;
+	width: 292px;
+	padding-left: 10px;
+	border: 2px solid grey;
+	outline: none;
+	font-size: 16px;
+}
+
+.mailtext {
+	text-decoration: none;
+	color: black;
+	rgb(74,204,142);
+}
+
+.mailtext:hover {
+	color: rgb(74, 204, 142);
+}
+
+/*企业注册模块样式*/
+.login-card2 {
+	display: none;
+	width: 360px;
+	height: 100%;
+	border-radius: 3px;
+	background-color: white;
+	margin: 0px auto 45px;
+}
+
+.head-rediretion-text {
+	font-size: 18px;
+	font-weight: bold;
+	font-family: "微软雅黑";
+	text-align: center;
+	padding-right: 45px;
+}
+
+.r-sign-mail {
+	height: 24px;
+	line-height: 24px;
+	width: 210px;
+	padding-left: 10px;
+	border: 2px solid grey;
+	outline: none;
+	font-size: 16px;
+}
+
+.r-sign {
+	height: 24px;
+	line-height: 24px;
+	width: 292px;
+	padding-left: 10px;
+	border: 2px solid grey;
+	outline: none;
+	font-size: 16px;
+}
+
+/*底部样式*/
+.bottom {
+	height: 72px;
+	background: rgb(31, 47, 70);
+	color: white;
+	font-size: 12px;
+}
+
+.bottom ul {
+	padding-top: 10px;
+}
+
+.bottom a {
+	color: white;
+}
+
+.login-bottom-text {
+	font-size: 12px;
+	color: white;
+}
+
+.login-bottoml-text {
+	font-size: 12px;
+	color: white;
+}
+
+.bottom-text1 {
+	padding-top: 10px;
+	padding-left: 20px;
+}
+
+.bottom-text2 {
+	padding-right: 30px;
+}
+
+.bottom-text3 {
+	padding-right: 30px;
+}

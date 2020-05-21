@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+
+	<head>
+		<meta charset="UTF-8">
+		<title>选择方案理由</title>
+	</head>
+
+	<body>
+		<h3>学生选择方案理由（选择理由必须填写&&超过开课人数，选择失败）</h3>
+		<form action="SelectProjectServlet">
+			<p>
+				方案编号:<input type="text" readonly="readonly" name="prono" value="<%=pno%>"> 方案名:<input type="text" readonly="readonly" name="proname" value="<%=pname%>"> 方案公司账号:
+				<input type="text" readonly="readonly" name="comusername" value="<%=pconame%>">
+			</p>
+			选择方案理由
+			<p>
+				<textarea cols="107" name="reason" rows="8"></textarea>
+			</p>
+			<input type="submit" value="提交">
+		</form>
+	</body>
+
+</html>

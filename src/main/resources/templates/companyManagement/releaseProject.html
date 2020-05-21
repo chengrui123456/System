@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+
+	<head>
+		<meta charset="UTF-8">
+		<title>企业发布方案</title>
+		<link rel="stylesheet" type="text/css" th:href="@{../css/bootstrap/css/bootstrap.min.css}">
+		<script th:src="@{../js/jquery-3.3.1.min.js}"></script>
+		<script th:src="@{../js/bootstrap.min.js}"></script>
+	</head>
+
+	<body>
+		<form action="/insertProject" method="post" onsubmit="return checkUser();">
+			<h1><b>发布方案</b></h1>
+			<br>
+			<p>
+				方案名称：<input type="text" id="proname" name="name"> 开课年级：
+				<select name="grade" id="grade">
+					<option value="1">大一</option>
+					<option value="2">大二</option>
+					<option value="3">大三</option>
+					<option value="4">大四</option>
+				</select> 开课人数：<input type="text" id="peonum" name="studentNum">
+			</p>
+			<p>
+				开课老师：<input type="text" id="teacher" name="companyTeacher"> 开课类型：
+				<select name="category">
+					<option value="技能实训">技能实训</option>
+					<option value="概念实训">概念实训</option>
+					<option value="综合实训">综合实训</option>
+				</select> 教师职称：<input type="text" name="companyTeacherTitle">
+			</p>
+
+			开课专业：
+			<p>
+				<textarea name="major" cols="107" rows="8"></textarea>
+			</p>
+			方案说明：
+			<p>
+				<textarea name="instruction" cols="107" rows="8"></textarea>
+			</p>
+			<p>
+				<button class="btn btn-primary" type="submit">提交</button>
+			</p>
+		</form>
+		<script>
+			function checkUser() {
+				var result = document.getElementById("proname").value;
+				var result1 = document.getElementById("grade").value;
+				var result2 = document.getElementById("peonum").value;
+				if(result == "") {
+					alert("方案名不能为空");
+					return false;
+				} else if(result1 == "") {
+					alert("年级不能为空");
+					return false;
+				} else if(result2 == "") {
+					alert("开课人数不能为空");
+					return false;
+				} else {
+					return true;
+				}
+			}
+		</script>
+	</body>
+
+</html>

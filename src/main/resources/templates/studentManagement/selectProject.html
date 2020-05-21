@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+
+	<head>
+		<meta charset="UTF-8">
+		<title>选择课程界面</title>
+		<link rel="stylesheet" type="text/css" th:href="@{../css/bootstrap/css/bootstrap.min.css}">
+		<script th:src="@{../js/jquery-3.3.1.min.js}"></script>
+		<script th:src="@{../js/bootstrap.min.js}"></script>
+		<script type="text/javascript" th:src="@{../layer/layer.js}"></script>
+		<style type="text/css">
+			a {
+				text-decoration: none;
+			}
+		</style>
+
+	</head>
+
+
+	<body>
+		<div class="panel-body">
+			<p>
+				<h3><b>学生已选择项目</b></h3></p>
+			<br>
+			<div class="show-list text-center" style="font-size: 15px">
+				<table class="table table-bordered table-hover" style='text-align: center;'>
+					<thead>
+						<tr class="text-danger">
+							<th class="text-center">项目编号</th>
+							<th class="text-center">项目名称</th>
+							<th class="text-center">开课公司</th>
+							<th class="text-center">开课老师</th>
+							<th class="text-center">开课年级</th>
+							<th class="text-center">开课类型</th>
+							<th class="text-center">开课专业</th>
+							<th class="text-center">上传日期</th>
+							<th class="text-center">审核日期</th>
+							<th class="text-center">截止日期</th>
+							<th class="text-center">操作</th>
+
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="project : ${projects}">
+							<td th:text="${project.no}"></td>
+							<td th:text="${project.name}"></td>
+							<td th:text="${project.company_username}"></td>
+							<td th:text="${project.company_teacher}"></td>
+							<td th:text="${project.grade}"></td>
+							<td th:text="${project.category}"></td>
+							<td th:text="${project.major}"></td>
+							<td th:text="${project.release_date}"></td>
+							<td th:text="${project.audit_date}"></td>
+							<td th:text="${project.end_date}"></td>
+							<td>
+								<button class="btn btn-primary">
+									<a th:href="@{/deleteStuProject?(projectNo=${project.no})}" style="text-decoration: none;color: white;">退选</a></button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!--end 学生已选择项目 -->
+
+		<!--start 学生开始选择项目-->
+		<div class="panel-body">
+			<p>
+				<h3><b>学生选择项目&nbsp;&nbsp;<span id="msgItem" style="color: red" th:text="${Msg}"/></b></h3></p>
+			<div>
+				<form class="form-inline" id="find-param" action="/studentController/selectProjectBy" method="post">
+					<div class="form-group">
+						<label for="find-name">编号</label>
+						<input type="text" class="form-control" placeholder="请输入项目编号" id="find-name" name="name" value="">
+					</div>
+					&nbsp;
+					<div class="form-group">
+						<label for="find-price">项目名称</label>
+						<input type="text" class="form-control" id="find-price" placeholder="请输入项目名称" name="price" value="">
+					</div>
+					&nbsp;
+					<div class="form-group">
+						<label>类型</label>
+						<br />
+						<select id="find-type" class="type" style="width: 100px;height: 32px;" name="typeId">
+							<option value="">---请选择--</option>
+							<!--<option th:each="type : ${typeList}" th:value="${type.id}" th:text="${type.name}"></option>-->
+							<option value="1">概念实训</option>
+							<option value="2">集中实训</option>
+							<option value="3">综合实训</option>
+						</select>
+					</div>
+					<button type="submit" style="margin-top: 25px;" class="btn btn-primary">查询</button>
+				</form>
+			</div>
+			<br>
+<!--			<span>总共<span th:text="${paper.totalPage}"></span>页</span>-->
+<!--			<span>总记录<span th:text="${paper.totalSize}"></span>条</span>-->
+<!--			<span>当前第<span th:text="${paper.pageNow}"></span>页</span>-->
+<!--			<span>本页<span th:text="${(paper.totalPage==paper.pageNow)?(paper.totalSize%paper.pageSize):paper.pageSize}"></span>条</span>-->
+			<div class="show-list text-center" style="font-size: 15px">
+				<table class="table table-bordered table-hover" style='text-align: center;'>
+					<thead>
+						<tr class="text-danger">
+							<th class="text-center">项目编号</th>
+							<th class="text-center">项目名称</th>
+							<th class="text-center">开课公司</th>
+							<th class="text-center">开课老师</th>
+							<th class="text-center">开课年级</th>
+							<th class="text-center">开课类型</th>
+							<th class="text-center">开课专业</th>
+							<th class="text-center">上传日期</th>
+							<th class="text-center">审核日期</th>
+							<th class="text-center">截止日期</th>
+							<th class="text-center">操作</th>
+
+						</tr>
+					</thead>
+					<tbody>
+					<tr th:each="allProject : ${allProjects}">
+						<td th:text="${allProject.no}"></td>
+						<td th:text="${allProject.name}"></td>
+						<td th:text="${allProject.company_username}"></td>
+						<td th:text="${allProject.company_teacher}"></td>
+						<td th:text="${allProject.grade}"></td>
+						<td th:text="${allProject.category}"></td>
+						<td th:text="${allProject.major}"></td>
+						<td th:text="${allProject.release_date}"></td>
+						<td th:text="${allProject.audit_date}"></td>
+						<td th:text="${allProject.end_date}"></td>
+						<td>
+								<!--
+                            	名称：选择课程的href标签
+                            	时间：2019-09-18
+                            	描述：th:href="@{selectReason.html?(pno=${sp.no }&pname=${sp.name}&pconame=${sp.companyUsername})}"
+                            -->
+								<button class="btn btn-primary" th:if="${allProject.audit_date!=null}" th:onclick="'javascript:openModal('+${allProject.no}+');'"><a href="#"   style="text-decoration: none;color: white;">选择</a></button>
+								<button class="btn btn-warning" th:if="${allProject.audit_date==null}"><a href="#"  style="text-decoration: none;color: white;  display: none">不可选择</a></button>
+<!--																						display: none"-->
+							</td>
+						</tr>
+					</tbody>
+				</table>
+<!--				<button class="btn btn-primary"><a style="text-decoration: none;color: white; " th:href="@{SelectProjectInfoServlet?(page=${paper.hasFirst?1:1})}">首页</a></button>-->
+<!--				<button class="btn btn-primary"><a style="text-decoration: none;color: white; " th:href="@{SelectProjectInfoServlet?(page=${paper.hasPre?paper.pageNow-1:1})}">上一页</a></button>-->
+<!--				<button class="btn btn-primary"><a style="text-decoration: none;color: white; " th:href="@{SelectProjectInfoServlet?(page=${paper.hasNext?(paper.pageNow+1):paper.totalPage})}">下一页</a></button>-->
+<!--				<button class="btn btn-primary"><a style="text-decoration: none;color: white; " th:href="@{SelectProjectInfoServlet?(page=${paper.hasLast?paper.totalPage:paper.totalPage})}">尾页</a></button>-->
+			</div>
+		</div>
+
+		<!-- 添加选课原因 -->
+		<div class="modal fade" tabindex="-1" id="select-modal">
+			<!-- 窗口声明 -->
+			<div class="modal-dialog modal-lg">
+				<!-- 内容声明 -->
+				<form class="form-horizontal" action="/studentController/insertSelectProject">
+					<div class="modal-content">
+						<!-- 头部、主体、脚注 -->
+						<div class="modal-header">
+							<button class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">学生选择方案理由</h4>
+						</div>
+						<div class="modal-body text-center row">
+							<!-- 隐藏方案编号 -->
+							<input type="hidden" name="projectId" id="projectId" />
+							<div class="form-group">
+								<label for="add-description" class="col-sm-4 control-label" style="margin-left: -43px;">填写理由：</label>
+								<br>
+								<div class="col-sm-8" style="margin-left: 60px;">
+									<textarea name="sel_reason" id="add-description" rows="8" cols="130" class="form-control"></textarea>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button class="btn btn-primary" type="submit">选择
+                    </button>
+							<button class="btn btn-primary cancel" data-dismiss="modal">取消</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<script>
+			function openModal(id) {
+					$("#select-modal").modal("show");
+					$("#projectId").val(id);
+			}
+		</script>
+
+	</body>
+
+</html>

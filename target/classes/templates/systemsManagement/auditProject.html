@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+
+	<head>
+		<meta charset="UTF-8">
+		<title>项目审核</title>
+		<!-- Scripts Starts -->
+		<link rel="stylesheet" type="text/css" th:href="@{../css/bootstrap.min.css}">
+		<script th:src="@{../js/jquery-3.3.1.min.js}"></script>
+		<script th:src="@{../js/bootstrap.min.js}"></script>
+		<!-- End JQuery -->
+	</head>
+
+	<body>
+		<!--start 项目审核列表-->
+		<div class="panel-body">
+			<p>
+				<h3><b>项目审核列表列表</b></h3>
+			</p>
+			<br />
+			<div>
+				<form class="form-inline" id="find-param" action="findProjectSome" method="post">
+					<div class="form-group">
+						<label for="find-price">企业名称</label>
+						<input type="text" class="form-control" id="find-price" placeholder="请输入企业名称" name="name" >
+					</div>
+					&nbsp;&nbsp;
+					<button type="submit" style="" class="btn btn-primary">查询</button>
+				</form>
+				<br>
+				<div class="show-list text-center" style="font-size: 15px">
+					<table class="table table-bordered table-hover" style='text-align: center;'>
+						<br />
+						<thead>
+							<tr class="text-danger">
+								<th class="text-center">编号</th>
+								<th class="text-center">项目名称</th>
+								<th class="text-center">开课人数</th>
+								<th class="text-center">开课公司</th>
+								<th class="text-center">开课老师</th>
+								<th class="text-center">老师职称</th>
+								<th class="text-center">上传时间</th>
+								<th class="text-center">审核时间</th>
+								<th class="text-center">截止日期</th>
+								<th class="text-center">项目总结</th>
+								<th class="text-center">开课年级</th>
+								<th class="text-center">开课类型</th>
+								<th class="text-center">开课专业</th>
+								<th class="text-center">操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="p : ${pageInfo.list}">
+								<td th:text="${p.No}"></td>
+								<td th:text="${p.name}"></td>
+								<td th:text="${p.students_num}"></td>
+								<td th:text="${p.company_username}"></td>
+								<td th:text="${p.company_teacher}"></td>
+								<td th:text="${p.company_teacher_title}"></td>
+								<td th:text="${p.release_date}"></td>
+								<td th:text="${p.audit_date}"></td>
+								<td th:text="${p.end_date}"></td>
+								<td th:text="${p.summary}"></td>
+								<td th:text="${p.grade}"></td>
+								<td th:text="${p.category}"></td>
+								<td th:text="${p.major}"></td>
+								<td>
+									<button class="btn btn-primary" th:if="${p.audit_date==null}"><a href="#"  th:href="@{/updateProjectBySS?(pno=${p.No})}" style="text-decoration: none;color: white;">审核</a></button>
+									<button class="btn btn-primary" th:if="${p.audit_date!=null}"><a href="#"  th:href="@{/updateAuditBySS?(pno=${p.No})}" style="text-decoration: none;color: white;">退审</a></button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<p>当前 <span th:text="${pageInfo.pageNum}"></span> 页,总 <span th:text="${pageInfo.pages}"></span> 页,共 <span th:text="${pageInfo.total}"></span> 条记录</p>
+					<button class="btn btn-primary"><a style="text-decoration: none;color: white; " th:href="@{/systemsCompanyNotice}">首页</a></button>
+					<button class="btn btn-primary" ><a style="text-decoration: none;color: white; " th:href="@{/systemsCompanyNotice(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}">上一页</a></button>
+					<button class="btn btn-primary" ><a style="text-decoration: none;color: white; "  th:href="@{/systemsCompanyNotice(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}">下一页</a></button>
+					<button class="btn btn-primary"><a style="text-decoration: none;color: white; " th:href="@{/systemsCompanyNotice(pageNum=${pageInfo.pages})}">尾页</a></button>
+				</div>
+			</div>
+	</body>
+
+</html>

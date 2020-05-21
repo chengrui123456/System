@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+
+	<head>
+		<meta charset="UTF-8">
+		<title>管理员参数设置</title>
+		<!-- Scripts Starts -->
+		<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+		<script src="../js/jquery-3.3.1.min.js"></script>
+		<script src="../js/bootstrap.min.js"></script>
+		<!-- End JQuery -->
+	</head>
+
+	<body>
+		<div class="panel-body">
+			<b><span text="${sessionScope.account }"></span>管理员信息</b>
+			<br />
+			<br />
+			<form action="/updateSystemsInfo" method="post">
+				<p>
+					管理员账号:<input type="text" readonly="readonly" th:value="${session.system.adminUsername }" name="adminUsername"> 管理员密码:<input type="password" th:value="${session.system.adminPassword  }" name="adminPassword"> 管理员邀请码:
+					<input type="text"  th:value="${session.system.invitationCode }" name="invitationCode">
+				</p>
+				<p>
+					发布项目日期:<input type="text" th:value="${session.system.releaseProjectStartDate }" name="releaseProjectStartDate"> 结束项目日期:<input type="text" th:value="${session.system.releaseProjectEndDate }" name="releaseProjectEndDate"> 学生选择项目开始日期:
+					<input type="text" th:value="${session.system.studentSelStartDate}" name="studentSelStartDate">
+				</p>
+				<p>
+					学生选择项目结束日期:<input type="text" th:value="${session.system.studentSelEndDate }" name="studentSelEndDate"> 学生选择项目最大数量:
+					<input type="text" th:value="${session.system.studentSelMaxnum}" name="studentSelMaxnum">
+				</p>
+				<button type="submit" class="btn btn-primary" name="send" align="left" id="send">保存</button>
+				<button type="reset" class="btn btn-primary" name="cz">重置</button>
+			</form>
+		</div>
+	</body>
+
+</html>
